@@ -22,3 +22,9 @@ Downloaded 2026-11-17 from https://www.sf.gov/surveillance-technology-inventory.
 | SFMTA | Varies by use: 14 days (parking citations), 60 days (garage images), 2 years (garage data) |
 
 Gotchas: every policy contains template example text ("retained for 1 year", "generally less than 10 years") that an extractor will mistake for the real answer. SFMTA's retention table is scrambled in the `.txt`; read the PDF.
+
+## City's own status report
+
+| File | What | Source |
+|---|---|---|
+| biannual_inventory_2026-09.pdf | COIT Biannual Surveillance Technology Inventory Report, Sept 1 2026. Appendix A: 95 technologies / 59 policies BOS-approved (with approval dates). B: draft policies. C: seeking procurement. D: 28 technologies in use without an approved policy (26 SFPD). | https://api.sf.gov/documents/62751/Biannual_Surveillance_Technology_Inventory_Report_September_2026_Final_qxOhak7.pdf |

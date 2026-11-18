@@ -1,0 +1,455 @@
+City & County of San Francisco                                        Office of the City Administrator
+       Daniel Lurie, Mayor                                             Carmen Chu, City Administrator
+                                                                     Council on Information Technology
+                                                                         Edward McCaffrey, Director
+
+
+
+
+                                        REPORT
+ PUBLISHED BY:           Council on Information Technology
+ DATE:                   Tuesday, September 1, 2026
+ RE:                     Biannual Surveillance Technology Inventory Report
+                         for the period of time from March 2, 2026, to September 1, 2026
+ __________________________________________________________________________________________________________
+ The San Francisco Administrative Code via Chapter 19B: Acquisition of Surveillance Technology
+ requires the Council on Information Technology (COIT) staff to maintain an inventory of all
+ surveillance technologies that departments plan to buy or are using, and to publish a biannual report
+ on the inventory's status. The Biannual Surveillance Technology Inventory Report includes the
+ name of each technology in the inventory, a general technology category description, information
+ about if the department currently using or planning to use the technology, and information about
+ where that technology is in the policy creation and approval process.
+
+ This report provides the current status of technologies in the surveillance technology inventory and
+ changes that occurred from March 2, 2026, to September 1, 2026. As of September 1, 2026, 68%
+ of surveillance technologies in use or in the process of being procured have a surveillance
+ technology policy approved by the Board of Supervisors, 11% have a draft policy that has been
+ reviewed by the COIT Privacy and Surveillance Advisory Board, less than 1% is represented by
+ technologies seeking to be procured by the department but not yet in use or in a pilot period, and
+ 20% are surveillance technologies currently in use without a policy.
+
+ Since the last Biannual Surveillance Technology Inventory Report was published on March 2, 2026,
+ there have been the following updates. The Police Department’s Electronic Location Tracking
+ Devices Surveillance Technology Policy was reviewed and approved by the Board of Supervisors
+ on April 7, 2026 (See Appendix A). The Department of Public Health’s Weapons Detection Policy
+ was presented at the April 2026 Privacy and Surveillance Advisory Board Meeting and was
+ recommended for Board of Supervisors review pending changes (See Appendix B). The Airport’s
+ Virtual Vehicle Queuing System policy was withdrawn from Board of Supervisors review, as the
+ technology no longer fits the surveillance technology definition due to changes in the type and
+ amount of data collected.
+
+ The Surveillance Technology Inventory is posted online and can be accessed by visiting
+ https://www.sf.gov/biannual-surveillance-technology-inventory-reports. Publishing the Surveillance
+ Technology Inventory Report on the COIT website, allows anyone to track the progress of the
+ surveillance technology policy creation and approval, understand which technologies still need
+ policies and which are being used. If you have questions regarding this report, please direct them
+ to coit.staff@sfgov.org.
+
+
+
+
+                                             SFGSA.org ᐧ 3-1-1
+Appendix A. Technology Policies approved by the Board of Supervisors (BOS)
+
+The surveillance technology policies listed below were approved by the San Francisco Board of
+Supervisors prior to September 1, 2026. This list includes 95 technologies and 59 surveillance
+technology policies.
+
+There was one change to this section since the March 2, 2026 Surveillance Technology Inventory
+Report. The Police Department’s Electronic Location Tracking Devices Surveillance Technology
+Policy was reviewed and approved by the Board of Supervisors on April 7, 2026. The policy covered
+more than one technology, including one pilot period technology.
+
+ Technology             Department Name         Technology Name         BOS Approval Date
+ Category
+ ALPR                   Municipal               Transit-only lane            10/25/2022
+                        Transportation          enforcement (TOLE)
+                        Agency                  cameras
+ Audio Recorder         Airport                 Airport Gunshot              11/28/2023
+                                                Detection - proof of
+                                                concept
+
+ Audio Recorder         Department of           Gunshot Detection            9/24/2024
+                        Emergency               Hardware and
+                        Management              Services
+                                                (ShotSpotter)
+ Audio Recorder         Human Services          Call Recording                6/4/2024
+                        Agency                  Software
+
+ Audio Recorder         Police Department       ShotSpotter                  7/27/2021
+ Automated License      Airport                 License Plate                7/27/2021
+ Plate Reader                                   Recognition System
+ Automated License      Department of Public    Automatic License            7/27/2021
+ Plate Reader           Works                   Plate Reader
+ Automated License      Municipal               Automated License            10/25/2022
+ Plate Reader           Transportation          Plate Reader
+                        Agency
+ Automated License      Police Department       Automated License            7/27/2021
+ Plate Reader                                   Plate Reader (ALPR)
+ Automated License      Recreation and Park     License Plate                7/27/2021
+ Plate Reader           Department              Readers
+ Biometric Processing   Juvenile Probation      SCRAM CAM                    10/25/2022
+ Software and/or        Department
+ System
+ Camera                 Asian Art Museum        Security Camera              7/27/2021
+                                                System
+ Camera                 City Administrator’s    Security Camera              7/27/2021
+                        Office – Real Estate    Systems
+                        Department
+ Camera                 Airport                 Pre-security Closed          7/27/2021
+                                                Circuit Television
+                                                (CCTV) Cameras
+ Camera                 Airport                 Third-Party Cameras          11/15/2022
+
+
+                                                                                               2
+Camera   Arts Commission        Surveillance           7/27/2021
+                                Cameras
+Camera   Child Support          Sonitrol Security      7/27/2021
+         Services               Cameras
+Camera   Department of          Closed Circuit         7/27/2021
+         Emergency              Television Cameras
+         Management
+Camera   Department of          Security Cameras       7/27/2021
+         Human Resources
+Camera   Department of Public   CCTV Security          7/27/2021
+         Health                 Cameras
+Camera   Department of          Outdoor Facility       7/27/2021
+         Technology             Cameras
+Camera   Fine Arts Museum       Closed-circuit         12/12/2023
+                                television cameras
+                                (CCTVs), connected
+                                to recording devices
+Camera   Fire Department        Body-Worn Cameras      10/25/2022
+Camera   Fire Department        Surveillance           7/27/2021
+                                Cameras
+Camera   Department of          Security camera        7/27/2021
+         Homelessness and       system
+         Supportive Housing
+Camera   Human Services         Client Lobby           7/27/2021
+         Agency                 Cameras
+Camera   Public Library         Security Cameras       7/27/2021
+Camera   Public Library         Sensource People       10/25/2022
+                                Counters
+Camera   Municipal              Automated Speed        6/11/2024
+         Transportation         Enforcement
+         Agency                 Cameras
+Camera   Municipal              Red Light Cameras       7/1/2025
+         Transportation         and No Right-Turn
+         Agency                 Cameras
+Camera   Municipal              Security cameras       10/25/2022
+         Transportation         inside SFMTA-
+         Agency                 regulated taxi cabs
+Camera   Municipal              Genetec video          7/27/2021
+         Transportation         management
+         Agency                 software
+Camera   Municipal              Video Analytics for    5/14//2024
+         Transportation         SFMTA passenger
+         Agency                 vehicles
+Camera   Municipal              Video cameras          7/27/2021
+         Transportation
+         Agency
+Camera   Police Department      Non-City Entity/       9/27/2022
+                                Third-Party
+                                Surveillance
+                                Cameras without
+                                financial agreement
+
+                                                                    3
+Camera               Port                   Closed Circuit          7/27/2021
+                                            Television Camera
+                                            (CCTV)
+Camera               Port                   Network Video           7/27/2021
+                                            Recorder
+Camera               Public Utilities       Surveillance            7/27/2021
+                     Commission             Cameras
+Camera               Recreation and Park    Body-Worn Cameras       11/15/2022
+                     Department
+Camera               Recreation and Park    Security Cameras        7/27/2021
+                     Department
+Camera               Department of          Nest Cameras            11/15/2022
+                     Elections
+Camera               Rent Board             Security Cameras -      7/27/2021
+                                            Lobby
+Camera               War Memorial           Third-Party Cameras     10/25/2022
+Camera               War Memorial           Veterans Building       7/27/2021
+                                            Surveillance Camera
+                                            System
+Data Forensics       Juvenile Probation     Web Filtering           11/19/2024
+Software             Department             Software
+Drone                Department of Public   Aerial Drone            7/27/2021
+                     Works
+Drone                Department of          Aerial Drone            7/27/2021
+                     Technology
+Drone                Fire Department        Drone                   7/27/2021
+Drone                Port                   Unmanned Aerial         7/27/2021
+                                            Vehicle
+Drone                Public Utilities       Unmanned Aerial         7/27/2021
+                     Commission             Vehicles (aka UAVs,
+                                            Drones)
+Drone                Recreation and Park    UAV Drones              7/27/2021
+                     Department
+Local Area Network   Public Library         TBS - Today's           10/25/2022
+                                            Business Solutions
+                                            (MyPC, Papercut,
+                                            ePrintIt, Easy
+                                            Booking, ScanEZ) -
+                                            Computer Time and
+                                            Print Management
+                                            System
+Location             Airport                Application Based       11/28/2023
+Management System                           Commercial
+                                            Transport (ABCT)
+Location             Juvenile Probation     Electronic Monitoring   10/25/2022
+Management System    Department             Ankle Bracelet
+                                             (GPS)
+Location             Police Department      Electronic Location      4/7/2026
+Management System                           Tracking Devices
+Network Server       Port                   Network Server          7/27/2021
+RFID/Toll Reader     Airport                Electronic Toll         11/28/2023
+                                            Readers
+                                                                                 4
+RFID/Toll Reader      Public Library          RFID (Radio            7/27/2021
+                                              Frequency
+                                              Identification) Tags
+Social Media          Asian Art Museum        Mobile Fuse            12/12/2023
+Monitoring Software
+Social Media          City Administrator’s    Buffer                 12/12/2023
+Monitoring Software   Office – 311
+Social Media          City Administrator’s    Social Media           12/12/2023
+Monitoring Software   Office – Animal Care    Monitoring
+                      and Control             Technology
+Social Media          City Administrator’s    Social Media           12/12/2023
+Monitoring Software   Office – Central        Monitoring
+                      Office                  Technology
+Social Media          City Administrator’s    Social Media           12/12/2023
+Monitoring Software   Office – Office of      Monitoring
+                      Civic Engagement        Technology
+                      and Immigrant Affairs
+Social Media          Airport                 Hootsuite              12/12/2023
+Monitoring Software
+Social Media          Arts Commission         Hootsuite              12/12/2023
+Monitoring Software
+Social Media          Arts Commission         Meltwater              12/12/2023
+Monitoring Software
+Social Media          Office of Assessor-     Social Media           12/12/2023
+Monitoring Software   Recorder                Monitoring
+                                              Technology
+Social Media          Controller’s Office     Social Media           12/12/2023
+Monitoring Software                           Monitoring
+                                              Technology
+Social Media          City Planning           Social Media           12/12/2023
+Monitoring Software                           Monitoring
+                                              Technology
+Social Media          Department of           Social Media           12/12/2023
+Monitoring Software   Building Inspection     Monitoring
+                                              Technology
+Social Media          Department of           Social Media           12/12/2023
+Monitoring Software   Children, Youth, and    Monitoring
+                      Their Families          Technology
+Social Media          Department of Early     Social Media           12/12/2023
+Monitoring Software   Childhood               Monitoring
+                                              Technology
+Social Media          Department of           Hootsuite              12/12/2023
+Monitoring Software   Emergency
+                      Management
+Social Media          Department of           Tweetdeck              12/12/2023
+Monitoring Software   Emergency               (freeware)
+                      Management
+Social Media          Department of Police    Social Media           12/12/2023
+Monitoring Software   Accountability          Monitoring
+                                              Technology
+
+
+
+                                                                                  5
+Social Media          Department of Public   Social Media          12/12/2023
+Monitoring Software   Health                 Monitoring
+                                             Technology
+Social Media          Department of          Archive Social        12/12/2023
+Monitoring Software   Technology
+Social Media          Department of the      Social Media          12/12/2023
+Monitoring Software   Environment            Monitoring
+                                             Technology
+Social Media          Ethics Commission      Social Media          12/12/2023
+Monitoring Software                          Monitoring
+                                             Technology
+Social Media          Fire Department        Critical Mention      9/21/2023
+Monitoring Software
+Social Media          Department of          Social Media          12/12/2023
+Monitoring Software   Homelessness and       Monitoring
+                      Supportive Housing     Technology
+Social Media          Human Rights           Social Media          12/12/2023
+Monitoring Software   Commission             Monitoring
+                                             Technology
+Social Media          Human Rights           Social Media          12/12/2023
+Monitoring Software   Commission – Office    Monitoring
+                      of Transgender         Technology
+                      Initiatives
+Social Media          Human Service          Sprout Social         7/25/2023
+Monitoring Software   Agency
+Social Media          Human Services         Meltwater             7/25/2023
+Monitoring Software   Agency
+Social Media          Public Library         Hootsuite             10/25/2022
+Monitoring Software
+Social Media          Public Library         Meltwater             10/25/2022
+Monitoring Software
+Social Media          Municipal              Social media          12/12/2023
+Monitoring Software   Transportation         monitoring software
+                      Agency
+Social Media          Mayor’s Office         Social Media          12/12/2023
+Monitoring Software                          Monitoring
+                                             Technology
+Social Media          Office of Economic     Social Media          12/12/2023
+Monitoring Software   and Workforce          Monitoring
+                      Development            Technology
+Social Media          Port                   Hootsuite Social      12/12/2023
+Monitoring Software                          Media Monitoring
+Social Media          Public Utilities       Hootsuite             12/12/2023
+Monitoring Software   Commission
+Social Media          Recreation and Park    Social Media          12/12/2023
+Monitoring Software   Department             Monitoring
+                                             Technology
+Social Media          Department of          Social Media          10/24/2023
+Monitoring Software   Elections              Monitoring
+                                             Technology
+
+
+
+                                                                                6
+Appendix B. Technology Policies with a draft policy reviewed by COIT Privacy and
+Surveillance Advisory Board (PSAB)
+The surveillance technologies listed below include all of the draft policies that have been reviewed
+and voted on at a meeting of the Privacy and Surveillance Advisory Board, a COIT subcommittee,
+prior to September 1, 2026. This list includes fifteen technologies represented by seven policies,
+from four departments.
+
+There were three changes to this section since the March 2, 2026 Surveillance Technology
+Inventory Report. The first change is that the Police Department’s Electronic Location Tracking
+Devices Surveillance Technology Policy was approved by the Board of Supervisors and moved to
+Appendix A of this report. The second change is that the Department of Public Health’s Weapons
+Detection Policy was presented at the April 2026 Privacy and Surveillance Advisory Board Meeting
+and was recommended for Board of Supervisors review pending changes. The third change is that
+the Airport’s Virtual Vehicle Queuing System policy was withdrawn from Board of Supervisors
+review, as the Airport decided to change the types of data which are collected by the technology;
+because of this, it no longer fits the surveillance technology definition and has been withdrawn from
+the surveillance technology inventory.
+
+ Technology               Technology Name          Department               PSAB
+ Category                                                                   Recommendation
+                                                                            Date
+ Biometric Processing     Alcohol Monitoring       Adult Probation          10/28/2022
+ Software and/or          Ankle Bracelet           Department
+ System
+ Camera                   Body-Worn Cameras        Police Department        4/24/2025
+ Camera, Non-             Weapons Detection        Department of Public     4/23/2026
+ Security                 System                   Health
+ Data Forensics           Data Extraction Tool     Police Department        6/29/2023
+ Software                 for Computers and
+                          Cell Phones
+ Location                 GPS Monitoring Ankle     Adult Probation          10/28/2022
+ Management System        Bracelet                 Department
+ Social Media             Social Media             Fire Department          8/24/2023
+ Monitoring Software      Monitoring Software
+ Temporary ID and         Temporary Visitor        Department of Public     2/27/2025
+ Contact Tracing          Registration, ID, and    Health
+ System                   Tracking System
+
+
+
+
+                                                                                                   7
+Appendix C. Technologies seeking to be procured by department but not yet in use or is in
+the Police Department pilot period
+
+
+This category includes technologies that departments are seeking to procure but have not yet
+deployed for full operational use or technologies which are in a pilot period without an approved
+policy.
+Under the Chapter 19B Ordinance enacted in July 2019, surveillance technologies require Board
+of Supervisors-approved policies before use. However, the ordinance includes a specific provision
+allowing the Police Department—and only the Police Department—to conduct a one-year pilot
+period for new surveillance technologies before obtaining final policy approval. This pilot provision
+was added through a voter-approved ballot measure in March 2024, which amended Chapter 19B
+to allow for real-world testing of police surveillance technologies before committing to full
+deployment and policy formalization.
+
+Therefore, technologies in this category fall into one of two situations: (a) technologies that
+departments sought to procure for the first time after July 2019 but have not yet received review
+and recommendation from COIT's Privacy and Surveillance Advisory Board or Board of Supervisors
+approval, or (b) technologies being piloted by the Police Department under the one-year pilot
+provision. No technologies listed in this section were in use prior to the July 2019 enactment of
+Chapter 19B.
+
+There is currently one technology in this category, which is in a pilot period with the Police
+Department.
+
+ Technology          Technology Name              Department Name              Pilot Period
+ Category                                                                      Started
+ Data Analytics      Video Analytics with AI      Police Department            12/1/2025
+ Software
+
+
+
+
+                                                                                                   8
+Appendix D. Technologies being used without an approved policy
+
+
+These technologies are currently being used without an approved Surveillance Technology Policy.
+All of the technologies listed below were used or in use prior to the 19B Ordinance being enacted
+in July 2019. This list includes 28 technologies from nine departments.
+
+
+ Technology Category        Technology Name                       Department
+ Audio Recorder             Audio Recorders on Surveillance       Police Department
+                            Van
+ Audio Recorder/ Video      Hostage Negotiation Throw Phone       Police Department
+ Recorder                   (with and without camera)
+ Biometric Processing       Cogent ABIS (Automatic Biometric      Police Department
+ Software and/or System     Identification System)
+ Biometric Processing       DataWorksPlus Digital Crime Scene     Police Department
+ Software and/or System     system
+ Biometric Processing       DataWorksPlus Digital Photo           Police Department
+ Software and/or System     Manager system
+ Biometric Processing       Microblink Software                   Police Department
+ Software and/or System
+ Camera                     CommPort Tech (Under Vehicle          Police Department
+                            Camera)
+ Camera                     Fiber Optic Camera                    Police Department
+ Camera                     IP Cameras (Digital Cameras)          Police Department
+
+ Camera                     Pole Camera                           Police Department
+ Camera                     Security Cameras (City Department     Police Department
+                            Surveillance Cameras)
+ Camera                     SWAT Camera                           Police Department
+ Camera                     Tactical Electronics Fiber Scope      Police Department
+ Camera                     Under Door Camera                     Police Department
+ Camera                     Under Vehicle Camera                  Police Department
+ Camera                     Vertmax Camera                        Police Department
+ Data Forensics Software    DVR Recorder                          Police Department
+ Data Forensics Software    Magnetic Forensics                    Police Department
+ Local Area Network         Public Wi-Fi Network                  Asian Art Museum
+                            (multi-departmental)                  Airport
+                                                                  Department of Public Health
+                                                                  Department of Technology
+                                                                  Fine Arts Museum
+                                                                  Public Library
+                                                                  Municipal Transportation
+                                                                  Agency
+                                                                  Public Utilities Commission
+ Location Management        Data Feeds for Stationless Bicycles   Municipal Transportation
+ System                                                           Agency
+ Location Management        Electronic Taxi Access System         Municipal Transportation
+ System                                                           Agency
+                                                                                                9
+Location Management       CellHawk   Police Department
+System
+Social Media Monitoring   Penlink    Police Department
+Software
+
+
+
+
+                                                         10
+
