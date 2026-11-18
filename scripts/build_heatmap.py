@@ -93,6 +93,14 @@ CELLS = {
     },
 }
 
+SOURCE_URLS = {
+    "sfpd_alpr_amend": "https://www.sf.gov/documents/55994/Surveillance_Tech_Policy_Amend.pdf",
+    "airport_alpr_stp": "https://www.sf.gov/airport-automated-license-plate-readers-surveillance-technology-policy",
+    "sfmta_lpr_tole_stp": "https://sfgov.legistar.com/View.ashx?M=F&ID=11065541&GUID=A886AD5F-639A-48C9-9D6D-DE2B9D50E6C1",
+    "pw_alpr_stp": "https://www.sf.gov/sites/default/files/2021-02/PW_Surveillance%20Technology%20Policy_ALPR_FINAL_0.pdf",
+    "rec_alpr_stp": "https://www.sf.gov/sites/default/files/2022-03/REC_Surveillance%20Technology%20Ordinance_ALPR_Policy_COIT.pdf",
+}
+
 MISSING_SEARCH = {
     "federal": "searched for “federal agenc”, “out-of-state”",
     "statelaw": "searched for “1798.90”",
@@ -153,7 +161,7 @@ def main():
                 where = "web page"
             cells.append({"key": key, "level": level, "summary": summary, "quote": quote,
                           "where": where, "searched": MISSING_SEARCH.get(key) if level == "missing" else None})
-        rows.append({"short": short, "full": full, "file": f"data/sf-surveillance-inventory/{stem}.{kind}", "cells": cells})
+        rows.append({"short": short, "full": full, "file": SOURCE_URLS[stem], "fname": f"{stem}.{kind}", "cells": cells})
 
     if failures:
         print("QUOTE CHECK FAILED, not publishing:\n  " + "\n  ".join(failures)); sys.exit(1)
@@ -173,19 +181,21 @@ def main():
     for k, v in metrics.items():
         print(f"{k:20s} {v}")
 
-    page = TEMPLATE.replace("__DATA__", json.dumps({"columns": COLUMNS, "rows": rows, "metrics": metrics, "noPolicy": NO_POLICY}))
-    (ROOT / "heatmap.html").write_text(page)
+    body = TEMPLATE.replace("__DATA__", json.dumps({"columns": COLUMNS, "rows": rows, "metrics": metrics, "noPolicy": NO_POLICY}))
+    (ROOT / "heatmap.html").write_text('<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">\n' + body + "\n</html>")
+    pub = ROOT / "_publish"; pub.mkdir(exist_ok=True)
+    (pub / "policy-vs-promise.html").write_text(body)
     print(f"\nwrote {ROOT / 'heatmap.html'}  ({checked}/{checked} quotes found verbatim in source)")
 
 
-TEMPLATE = r"""<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Policy vs Promise</title>
+TEMPLATE = r"""<title>Policy vs Promise</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <style>
 :root{--bg:#f7f6f2;--fg:#1c1b19;--muted:#6b6862;--card:#fff;--line:#e2dfd8;--ok:#2f7d4f;--okbg:#dcefe2;--vague:#9a6500;--vaguebg:#f8e9c6;--miss:#b3261e;--missbg:#f7d9d6}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#141413;--fg:#ecebe7;--muted:#9b978f;--card:#1e1e1c;--line:#33322f;--ok:#7fd19d;--okbg:#1f3a2a;--vague:#f0c060;--vaguebg:#3d3118;--miss:#f19a92;--missbg:#45201d}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141413;--fg:#ecebe7;--muted:#9b978f;--card:#1e1e1c;--line:#33322f;--ok:#7fd19d;--okbg:#1f3a2a;--vague:#f0c060;--vaguebg:#3d3118;--miss:#f19a92;--missbg:#45201d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141413;--fg:#ecebe7;--muted:#9b978f;--card:#1e1e1c;--line:#33322f;--ok:#7fd19d;--okbg:#1f3a2a;--vague:#f0c060;--vaguebg:#3d3118;--miss:#f19a92;--missbg:#45201d;color-scheme:dark}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,sans-serif}
-main{max-width:1180px;margin:0 auto;padding:28px 16px 60px}
+main{max-width:1180px;margin:0 auto;padding-block:28px 60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 h1{font-size:26px;margin:0 0 4px}h2{font-size:17px;margin:34px 0 10px}.sub{color:var(--muted);margin:0 0 22px;max-width:760px}
 .promise{border-left:3px solid var(--fg);padding:8px 14px;margin:0 0 22px;background:var(--card);max-width:820px}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:26px}
@@ -204,7 +214,7 @@ td.dept{font-weight:600;white-space:nowrap}td.dept a{color:var(--muted);font-wei
 #drawer .meta{color:var(--muted);font-size:13px}
 .nopol{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:6px}.nopol div{background:var(--missbg);border-radius:6px;padding:6px 9px;font-size:13px}
 .foot{color:var(--muted);font-size:13px;margin-top:30px;max-width:820px}
-</style></head><body><main>
+</style><main>
 <h1>Policy vs Promise: SF license plate readers</h1>
 <p class="sub">Five San Francisco departments run plate readers. Each signed the same promise, then filled in its own rules. Click any cell to see the exact sentence from the policy.</p>
 <div class="promise"><b>The promise, word for word in the city template:</b> &ldquo;Departments shall minimize the use, collection, and retention of Personally Identifiable Information (PII) to what is strictly necessary to accomplish the intended purpose of the surveillance technology.&rdquo;</div>
@@ -235,11 +245,11 @@ const dr=document.getElementById('drawer');
 t.addEventListener('click',e=>{const b=e.target.closest('.cell');if(!b)return;
  document.querySelectorAll('.cell.sel').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');
  const r=D.rows[b.dataset.r],c=r.cells[b.dataset.c],col=D.columns[b.dataset.c];
- dr.innerHTML=`<b>${esc(r.full)}</b> &middot; ${esc(col[1])}<br>`+(c.quote?`<blockquote>&ldquo;${esc(c.quote)}&rdquo;</blockquote><span class="meta">${esc(c.where)} of <a href="${esc(r.file)}" target="_blank" rel="noopener">${esc(r.file.split('/').pop())}</a></span>`:
- `<p>${esc(c.summary)}.</p><span class="meta">No quote: ${esc(c.searched||'not found')} in <a href="${esc(r.file)}" target="_blank" rel="noopener">${esc(r.file.split('/').pop())}</a>.</span>`);});
+ dr.innerHTML=`<b>${esc(r.full)}</b> &middot; ${esc(col[1])}<br>`+(c.quote?`<blockquote>&ldquo;${esc(c.quote)}&rdquo;</blockquote><span class="meta">${esc(c.where)} of <a href="${esc(r.file)}" target="_blank" rel="noopener">${esc(r.fname)}</a></span>`:
+ `<p>${esc(c.summary)}.</p><span class="meta">No quote: ${esc(c.searched||'not found')} in <a href="${esc(r.file)}" target="_blank" rel="noopener">${esc(r.fname)}</a>.</span>`);});
 document.getElementById('np').textContent='28 surveillance technologies in use with no approved policy';
 document.getElementById('nopol').innerHTML=Object.entries(D.noPolicy).flatMap(([d,ts])=>ts.map(x=>`<div><b>${esc(x)}</b><br><span style="opacity:.75">${esc(d)}</span></div>`)).join('');
-</script></body></html>"""
+</script>"""
 
 if __name__ == "__main__":
     main()
