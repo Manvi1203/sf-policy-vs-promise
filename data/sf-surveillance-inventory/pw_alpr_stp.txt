@@ -1,0 +1,516 @@
+         Surveillance Technology Policy
+         OnSight Portable License Plate Reader
+         Public Works
+
+The City and County of San Francisco values privacy and protection of San Francisco residents’ civil
+rights and civil liberties. As required by San Francisco Administrative Code, Section 19B, the
+Surveillance Technology Policy aims to ensure the responsible use of OnSight Portable License Plate
+Reader itself as well as any associated data, and the protection of City and County of San Francisco
+residents’ civil rights and liberties.
+
+PURPOSE AND SCOPE
+
+The Department's mission is to care for and build the City's assets for the People of San Francisco
+The Surveillance Technology Policy (“Policy”) defines the manner in which the OnSight Portable
+License Plate Reader will be used to support this mission, by describing the intended purpose,
+authorized and restricted uses, and requirements.
+This Policy applies to all to department personnel that use, plan to use, or plan to secure OnSight
+Portable License Plate Reader, including employees, contractors, and volunteers. Employees,
+consultants, volunteers, and vendors while working on behalf of the City with the Department are
+required to comply with this Policy.
+
+POLICY STATEMENT
+
+The authorized use of OnSight Portable License Plate Reader technology for the Department is
+limited to the following use cases and is subject to the requirements listed in this Policy.
+Authorized Use(s):
+Discourage illegal dumping onto City Streets.
+
+
+Prohibited use cases include any uses not stated in the Authorized Use Case section.
+Further, processing of personal data revealing racial or ethnic origin, political opinions, religious or
+philosophical beliefs, or trade union membership, and the processing of genetic data, biometric data
+for the purpose of uniquely identifying an individual person, data concerning health or data
+concerning an individual person’s sex life or sexual orientation shall be prohibited.
+
+
+
+
+  Surveillance Oversight Review Dates
+  COIT Review: September 17, 2020
+  Board of Supervisors Review: August 4, 2021
+BUSINESS JUSTIFICATION
+
+OnSight Portable License Plate Reader supports the Department’s mission and provides important
+operational value in the following ways:
+Keeping the streets clean is a major challenge with ongoing illegal dumping. The License plate
+reader will allow us to capture illegal dumping and discourage illegal dumping.
+
+Public Works has two License Plate Readers that are currently mounted on a pole on our facility for
+proof of concept. Public Works’ intention is to attach additional License Plate Readers to buildings in
+neighborhoods at the request of, or with permission from the property owner. The Supervisor’s
+office is working on identifying participants.
+Hotspots of illegal dumping are identified through the following sources:
+   • 311
+   • Employee observations
+   • Email complaints from constituents
+In addition, OnSight Portable License Plate Reader promises to benefit residents in the following
+ways:
+     Education
+      Community
+
+      Development
+     Health
+                              Illegal dumping affects adjacent neighbors and
+     Environment             businesses. This will allow us to catch and prevent future
+                              illegal dumping in these neighborhoods.
+     Criminal Justice
+     Jobs
+     Housing
+     Other
+OnSight Portable License Plate Reader will benefit the department in the following ways:
+Benefit                     Description
+
+             Financial      It would be very costly to pay for humans to sit at night to catch
+
+             Savings        illegal dumpers
+            Time Savings
+
+
+
+
+  2
+                            We won't have to put staff in direct harm confronting illegal
+         Staff Safety      dumpers, won't have to have staff working at night in remote
+                            locations.
+                            The camera lens provides accurate license plate data. If we were
+         Data Quality      relying on a human they might misread the plate during low-light
+                            conditions.
+         Other
+
+
+Other benefits include Easily deployed to any outdoor environment without need for trenching. Can
+be used on either A/C or solar power. Web based user interface for easy accessing of information.
+POLICY REQUIREMENTS
+This Policy defines the responsible data management processes and legally enforceable safeguards
+required by the Department to ensure transparency, oversight, and accountability measures.
+Department use of surveillance technology and information collected, retained, processed or shared
+by surveillance technology must be consistent with this Policy; must comply with all City, State, and
+Federal laws and regulations; and must protect all state and federal Constitutional guarantees.
+
+
+Specifications:     The software and/or firmware used to operate the surveillance technology must
+                    be kept up to date and maintained.
+
+Safety:             Surveillance technology must be operated in a safe manner. Surveillance
+                    technology should not be operated in a way that infringes on resident civil rights,
+                    including privacy, or causes personal injury or property damage.
+
+Data Collection:    Departments shall minimize the use, collection, and retention of Personally
+                    Identifiable Information (PII) to what is strictly necessary to accomplish the
+                    intended purpose of the surveillance technology.
+                    Department shall only collect data required to execute the authorized use case.
+                    All data collected by the surveillance technology, including PII, shall be classified
+                    according to the City’s Data Classification Standard.
+                    Should information be incidentally collected that is not necessary to accomplish
+                    the intended purpose of the surveillance technology, including information that
+                    may be used to identify persons or private information, Department shall remove
+                    all incidental PII from raw data.
+                    Data types can take the form video, audio, still images. Data formats can take
+                    the form of XML, PDF, HTML, Plain Text, JPEG, etc. The surveillance technology
+                    collects the following data types and formats:
+
+
+  3
+                     •     Video in MOV format
+                     •     Still images from cameras in PDF format
+                The surveillance technology collects the following data types:
+                Data Type(s)             Format(s)    Classification
+                License Plate            AVI           Level 3
+                Facial features          AVI           Level 3
+
+                The technology does not use facial recognition but does take photos/videos that
+                may capture facial features. This technology will only be used to pursue
+                enforcement of illegal activity. Facial features and license plate information will
+                only be shared with relevant law enforcement for enforcement purposes.
+
+
+Notification:   Departments shall notify the public of intended surveillance technology operation
+                at the site of operations through signage in readily viewable public areas.
+                Department notifications shall identify the type of technology being used and the
+                purpose for such collection.
+                Department includes the following items in its public notice:
+
+                 Information on the surveillance technology
+                 Description of the authorized use
+                 Type of data collected
+                 Will persons be individually identified
+                 Data retention
+                 Department identification
+                 Contact information
+Access:         All parties requesting access must adhere to the following rules and processes
+                (please refer to the data sharing section to ensure all information covered in that
+                section is also included below): evidence of illegal dumping
+
+                A.       Department employees
+
+                Once collected, the following roles and job titles are authorized to access and use
+                data collected, retained, processed or shared by the surveillance technology.
+                     •     7281 Operations Supervisor 2, Public Works
+                The following providers are required to support and maintains the surveillance
+                technology and its associated data to ensure it remains functional:
+                     •     V5 Systems
+
+
+
+  4
+                 B.   Members of the public
+
+                 Public Works will comply with the California Public Records Act, the San Francisco
+                 Sunshine Ordinance, the requirements of the federal and State Constitutions, and
+                 federal and State civil procedure laws and rules.
+                 Data collected by surveillance technology will not be made available to members
+                 of the public, including criminal defendants.
+                 Collected data that is classified as Level 1-Public data may be made available for
+                 public access or release via DataSF’s Open Data portal. Anyone, including criminal
+                 defendants, may access such data. Open Data has a Public Domain Dedication
+                 and License, and makes no warranties on the information provided. Once public
+                 on Open Data, data can be freely shared, modified, and used for any purpose
+                 without any restrictions. Any damages resulting from use of public data are
+                 disclaimed, including by criminal defendants.
+                 Members of the public, including criminal defendants, may also request access by
+                 submission of a request pursuant to San Francisco’s Sunshine Ordinance. No
+                 record shall be withheld from disclosure in its entirety unless all information
+                 contained in it is exempt from disclosure under express provisions of the
+                 California Public Records Act or some other statute.
+
+Data Security:   Department shall secure PII against unauthorized or unlawful processing or
+                 disclosure; unwarranted access, manipulation or misuse; and accidental loss,
+                 destruction, or damage. Surveillance technology data collected and retained by
+                 the Department shall be protected by the safeguards appropriate for its
+                 classification level(s).
+                 To protect surveillance technology information from unauthorized access and
+                 control, including misuse, Departments shall, at minimum, apply the following
+                 safeguards:
+                 Supervisors will be monitored
+
+Data Sharing:    Public Works will comply with the California Public Records Act, the San Francisco
+                 Sunshine Ordinance, the requirements of the federal and State Constitutions, and
+                 federal and State civil procedure laws and rules.
+
+
+
+
+ 5
+    Public Works will endeavor to ensure that other agencies or departments that
+    may receive data collected by OnSight Portable License Plate Readers will act in
+    conformity with this Surveillance Technology Policy.
+
+
+    For internal and externally shared data, shared data shall not be accessed, used,
+    or processed by the recipient in a manner incompatible with the authorized use
+    cases stated in this Policy.
+    Public Works shall ensure proper administrative, technical, and physical
+    safeguards are in place before sharing data with other CCSF departments,
+    outside government entities, and third-party providers or vendors. (See Data
+    Security)
+    Public Works shall ensure all PII and restricted data is de-identified or adequately
+    protected to ensure the identities of individual subjects are effectively
+    safeguarded.
+    Each department that believes another agency or department receives or may
+    receive data collected from its use of STs should consult with its assigned deputy
+    city attorney regarding their response.
+    The Department currently participates in the following sharing practices:
+
+    A. Internal and External Data Sharing
+
+     Before sharing data with any recipients, the Department will use the following
+    procedure to ensure appropriate data protections are in place:
+
+     Confirm the purpose of the data sharing aligns with the department’s
+           mission.
+     Consider alternative methods other than sharing data that can accomplish the
+           purpose.
+     Redact names, scrub faces, and ensure all PII is removed in accordance with
+           the department’s data policies.
+     Review of all existing safeguards to ensure shared data does not increase
+           the risk of potential civil rights and liberties impacts on residents.
+     Evaluation of what data can be permissibly shared with members of the
+           public should a request be made in accordance with the San Francisco’s
+           Sunshine Ordinance.
+     Ensure shared data will be done in a cost-efficient manner and exported in a
+           clean, machine-readable format.
+    Department shares the following data with the recipients:
+       •     Public Works may share data with SFPD, CAT
+
+6
+                  Data sharing occurs at the following frequency:
+                     •   As needed
+
+
+                  Public Works may share data with SFPD and the District Attorney to pursue
+                  criminal charges.
+
+
+Data Retention:   Department may store and retain raw PII data only as long as necessary to
+                  accomplish a lawful and authorized purpose.
+                  Please list data retention schedules (i.e., x type of data will be retained for 1
+                  year) based on the following categories:
+                     •   Permanent records (i.e., records that are essential): shall be retained and
+                         preserved indefinitely
+                     •   Current records (i.e., records for operational necessity, ready reference,
+                         convenience): record retention schedules may vary but generally less
+                         than 10 years
+                     •   Storage records (i.e., records retained offsite): record retentions may vary
+                         but generally less than 10 years
+                  The Department’s data retention period and justification are as follows:
+
+                  Maximum of 30 days                Only need it long enough to
+                                                    confirm responsible parties
+
+                  PII data shall not be kept in a form which permits identification of data subjects
+                  for any longer than is necessary for the purposes for which the personal data are
+                  processed. PII data collected by the surveillance technology may be retained
+                  beyond the standard retention period only in the following circumstance(s):
+                     •   n/a
+                  Departments must establish appropriate safeguards for PII data stored for longer
+                  periods.
+                  Data will be stored in the following location:
+
+                   Local storage
+                   Department of Technology Data Center
+                   Software as a Service Product
+                   Cloud Storage Provider
+Data Disposal:    Upon completion of the data retention period, Department shall dispose of data
+                  in the following manner:
+
+
+
+ 7
+                    Practices: Automatic overwrite after 30 days
+                    Processes and Applications: n/a
+
+
+Training:           To reduce the possibility that surveillance technology or its associated data will
+                    be misused or used contrary to its authorized use, all individuals requiring access
+                    must receive training on data security policies and procedures.
+                    At the very least, department shall require all elected officials, employees,
+                    consultants, volunteers, and vendors working with the technology on its behalf to
+                    read and formally acknowledge all authorized and prohibited uses. Department
+                    shall also require that all individuals requesting data or regularly requiring data
+                    access receive appropriate training before being granted access to systems
+                    containing PII.
+
+
+COMPLIANCE
+Department shall oversee and enforce compliance with this Policy using the following methods:
+Deputy Director for Operations is responsible for monitoring compliance
+Department shall assign the following personnel to oversee Policy compliance by the Department
+and third-parties:
+Deputy Director for Operations
+Sanctions for violations of this Policy include the following:
+Removal or shutting down of technology until violations are resolved
+If a Department is alleged to have violated the Ordinance under San Francisco Administrative Code
+Chapter 19B, Department shall post a notice on the Department’s website that generally describes
+any corrective measure taken to address such allegation.
+Department is subject to enforcement procedures, as outlined in San Francisco Administrative Code
+Section 19B.8.
+EXCEPTIONS
+Only in exigent circumstances or in circumstances where law enforcement requires surveillance
+technology data for investigatory or prosecutorial functions may data collected, retained or
+processed by the surveillance technology be shared with law enforcement.
+
+
+
+
+  8
+DEFINITIONS
+
+
+Personally Identifiable Information:      Information that can be used to distinguish or trace an
+                                          individual’s identity, either alone or when combined with other
+                                          personal or identifying information that is linked or linkable to
+                                          a specific individual.
+
+Raw Data:                                 Information collected by a surveillance technology that has not
+                                          been processed and cleaned of all personal identifiable
+                                          information. The distribution and use of raw data is tightly
+                                          restricted.
+
+Exigent Circumstances                     An emergency involving imminent danger of death or serious
+                                          physical injury to any person that requires the immediate use
+                                          of Surveillance Technology or the information it provides.
+
+
+
+AUTHORIZATION
+
+Section 19B.4 of the City’s Administrative Code states, “It is the policy of the Board of Supervisors
+that it will approve a Surveillance Technology Policy ordinance only if it determines that the benefits
+the Surveillance Technology ordinance authorizes outweigh its costs, that the Surveillance Technology
+Policy ordinance will safeguard civil liberties and civil rights, and that the uses and deployments of the
+Surveillance Technology under the ordinance will not be based upon discriminatory or viewpoint-
+based factors or have a disparate impact on any community or Protected Class.”
+
+QUESTIONS & CONCERNS
+
+Public:
+Complaints or concerns can be submitted to the Department by:
+All complaints or concerns should be routed through 311.org
+Department shall acknowledge and respond to complaints and concerns in a timely and organized
+response. To do so, Department shall:
+Respond to 311 within required SLA
+City and County of San Francisco Employees:
+All questions regarding this policy should be directed to the employee's supervisor or to the director.
+Similarly, questions about other applicable laws governing the use of the surveillance technology or
+the issues related to privacy should be directed to the employee's supervisor or the director.
+
+
+  9
+APPENDIX A: Surveillance Technology Policy R equirem ents
+The following section shows all Surveillance Technology Policy requirements in order as defined
+by the San Francisco Administrative Code, Section 19B.
+
+1. A description of the product and services addressed by the Surveillance Technology, including
+the identity of any provider(s) whose services are essential to the functioning or effectiveness of
+the Surveillance Technology equipment or services for the intended purpose.
+
+Powered by solar with a battery, it captures data from vehicles in day or night to read the license
+plate. A 12 MM camera lens is paired with a LTE SIM Card to record the license plate information
+for a maximum of 30 days.
+IR/Starlight Hybrid Camera Sensor. 21"lx15"Wx9"D Weight 25lbs
+V5 Systems
+
+2. A description of the purpose(s) for which the Surveillance Technology equipment or services are
+proposed for acquisition, including the type of data that may be collected by the Surveillance
+Technology equipment or services.
+
+Technology Use:
+Keeping the streets clean is a major challenge with ongoing illegal dumping. The License plate
+reader will allow us to capture illegal dumping and follow up with the bad actors.
+PII:
+true
+
+3. The uses that are authorized, the rules and processes required prior to such use, and uses of
+the Surveillance Technology that will be expressly prohibited.
+
+Authorized Uses:
+
+ Only to follow up on illegal dumping onto City Streets
+
+
+
+Rules:
+anything outside of illegal dumping cases
+Prohibited Uses:
+only where illegal dumping was confirmed
+
+
+4. A description of the formats in which information collected by the Surveillance Technology is
+stored, copied, and/or accessed.
+
+
+  10
+Data Type                  Formats STP
+
+License Plate              AVI
+
+Facial features            AVI
+
+
+
+5. The specific categories and titles of individuals who are authorized by the Department to access
+or use the collected information, including restrictions on how and under what circumstances data
+collected with Surveillance Technology can be analyzed and reviewed, and the rules and processes
+required prior to access or use of the information.
+
+Employee Job Classification & Title:
+only where illegal dumping was confirmed
+Department:
+Public Works
+If applicable, contractor or vendor name:
+V5 Systems
+Rules and processes required prior to data access or use:
+Supervisors will be monitored
+
+6. The general safeguards that protect information from unauthorized access, including encryption
+and access control mechanisms.
+
+only where illegal dumping was confirmed
+
+7. The limited time period, if any, that information collected by the Surveillance Technology will be
+routinely retained, the reason such retention period is appropriate to further the purpose(s)
+enumerated in the Surveillance Technology Policy, the process by which the information is
+regularly deleted after that period lapses, and the specific conditions that must be met to retain
+information beyond that period
+
+Retention:
+only need it long enough to confirm responsible parties
+Reason for retention:
+n/a
+Deletion process:
+only need it long enough to confirm responsible parties
+Retention exemption conditions:
+
+
+
+  11
+n/a
+
+8. How collected information can be accessed or used by members of the public, including criminal
+defendants
+
+Will the data be accessible to the public:
+Maximum of 30 days
+How it can be accessed:
+
+9. Which governmental agencies, departments, bureaus, divisions, or units that may receive data
+collected by the Surveillance Technology operated by the Department, including any required
+justification or legal standard necessary to share that data and how it will ensure that any entity
+receiving such data complies with the Surveillance Technology Policy.
+
+Name of agency: Public Works may share data with SFPD, CAT
+Justification:
+
+10. The training required for any individual authorized to use the Surveillance Technology or to
+access information collected by the Surveillance Technology
+
+Training required:
+false
+Description of training:
+
+11. The mechanisms to ensure that the Surveillance Technology Policy is followed, including
+internal personnel assigned to ensure compliance with the policy, internal recordkeeping of the
+use of the technology or access to information collected by the technology, technical measures to
+monitor for misuse, any independent person or entity with oversight authority, and the sanctions
+for violations of the policy
+
+Training required:
+false
+Process for responding to complaints:
+Deputy Director for Operations
+Oversight process:
+Removal or shutting down of technology until violations are resolved
+Compliance personnel titles:
+7281 Operations Supervisor 2, Public Works
+Restrictions:
+only where illegal dumping was confirmed
+
+
+  12
+12. What procedures will be put in place by which members of the public can register complaints
+or concerns, or submit questions about the deployment or use of a specific Surveillance
+Technology, and how the Department will ensure each question and complaint is responded to in
+a timely manner.
+
+Complaint procedures:
+respond to 311 within required SLA
+Departmental follow-up process:
+Larry Stringer, Deputy Director for Operations is responsible for monitoring compliance
+Members of the public can register complaints/concerns or submit questions via calls or emails at 311.org.
+
+
+
+
+  13
+

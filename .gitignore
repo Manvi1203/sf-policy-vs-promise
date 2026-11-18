@@ -1,0 +1,6 @@
+data/*
+!data/sf-surveillance-inventory/
+cache/
+__pycache__/
+.env
+*.pyc
