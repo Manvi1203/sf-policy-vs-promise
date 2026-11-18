@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WatchTheFlock — SF Policy vs. Promise & Bay Area Data Lineage</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+  <style>
+    body { background: #090d16; color: #e2e8f0; font-family: ui-sans-serif, system-ui, sans-serif; }
+    .leaflet-container { background: #0b1120; }
+    .leaflet-tile-pane { filter: invert(100%) hue-rotate(180deg) brightness(92%) contrast(90%) saturate(75%); }
+    @keyframes dashMove { to { stroke-dashoffset: -24; } }
+    .edge-gap { stroke-dasharray: 6 6; animation: dashMove 1s linear infinite; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- Header & Measured Scoreboard -->
+  <header class="border-b border-slate-800 bg-slate-950/90 px-5 py-3 flex flex-wrap items-center justify-between gap-4">
+    <div>
+      <div class="flex items-center gap-2.5">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
+        <h1 class="text-lg font-bold tracking-tight text-white">WatchTheFlock</h1>
+        <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Track 4: Privacy · Agency &amp; Policy Level</span>
+        <a href="/intro.html" class="text-xs px-2.5 py-0.5 rounded bg-sky-900/60 hover:bg-sky-800 text-sky-300 border border-sky-700 transition">▶ Watch 35s Intro Film</a>
+      </div>
+      <p class="text-xs text-slate-400 mt-0.5">Comparing San Francisco surveillance policies against data-sharing reality (EFF Atlas + SF Surveillance Inventory)</p>
+    </div>
+    <div id="scoreboard" class="flex flex-wrap items-center gap-3 text-xs">
+      <div class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800">
+        <span class="text-slate-400">Bay Area Deployments:</span>
+        <strong id="m-total" class="text-sky-400 ml-1 font-mono">--</strong>
+      </div>
+      <div class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800">
+        <span class="text-slate-400">Sources &lt; 2 Yrs:</span>
+        <strong id="m-recent" class="text-amber-400 ml-1 font-mono">--</strong>
+      </div>
+      <div class="px-3 py-1.5 rounded-lg bg-red-950/40 border border-red-900/60">
+        <span class="text-red-300">SF Policies w/ Sharing Gaps:</span>
+        <strong id="m-gaps" class="text-red-400 ml-1 font-mono">--</strong>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main 2-Column Workspace -->
+  <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-4 p-4">
+    <!-- Left Panel (7 cols): Tabs for A->B Heatmap + Policy Matrix -->
+    <section class="lg:col-span-7 flex flex-col bg-slate-900/70 border border-slate-800 rounded-xl overflow-hidden">
+      <div class="flex items-center justify-between border-b border-slate-800 px-4 py-2.5 bg-slate-950/50">
+        <div class="flex gap-2">
+          <button id="tab-map-btn" onclick="switchTab('map')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 text-white">
+            1. A → B Commute &amp; Density Heatmap
+          </button>
+          <button id="tab-table-btn" onclick="switchTab('table')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white">
+            2. SF Policy vs. Promise Matrix
+          </button>
+        </div>
+        <span class="text-[11px] text-slate-400">Agency/city level only · Zero street-pole GPS</span>
+      </div>
+
+      <!-- Tab 1: Jurisdiction Heatmap + A->B Commute -->
+      <div id="tab-map" class="p-3 space-y-3 flex-1 flex flex-col">
+        <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+          <div class="flex items-center gap-2">
+            <label class="text-slate-400">Route:</label>
+            <select id="route-select" onchange="renderRoute()" class="bg-slate-950 border border-slate-700 rounded px-2.5 py-1 text-slate-200">
+              <option value="0">San Francisco → SFO Airport → Palo Alto</option>
+              <option value="1">San Francisco → Oakland → Berkeley</option>
+              <option value="2">San Francisco → San Rafael (Marin)</option>
+            </select>
+          </div>
+          <div class="flex items-center gap-1 bg-slate-950 border border-slate-800 rounded p-0.5">
+            <button id="mode-drive" onclick="setMode('Driving')" class="px-2.5 py-1 rounded bg-sky-600 text-white font-medium">Driving</button>
+            <button id="mode-transit" onclick="setMode('Transit')" class="px-2.5 py-1 rounded text-slate-400 hover:text-white font-medium">Transit</button>
+          </div>
+        </div>
+
+        <div id="map" class="w-full h-[320px] rounded-lg border border-slate-800 z-0"></div>
+
+        <div>
+          <div class="text-xs font-semibold text-slate-300 mb-1.5">Jurisdictions Crossed on This Commute (click a leg to inspect data flow):</div>
+          <div id="route-legs" class="grid grid-cols-1 sm:grid-cols-3 gap-2"></div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Policy vs. Promise Matrix -->
+      <div id="tab-table" class="hidden p-3 space-y-3 flex-1 overflow-auto">
+        <div class="text-xs text-slate-400 flex items-center justify-between">
+          <span>Click any row to update the Lineage Graph. Click any <span class="text-amber-400 font-semibold">flagged cell</span> to verify the verbatim PDF/TXT quote.</span>
+        </div>
+        <div class="overflow-x-auto border border-slate-800 rounded-lg">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-950 text-slate-300 border-b border-slate-800">
+              <tr>
+                <th class="p-2.5">Agency &amp; Tech</th>
+                <th class="p-2.5">Retention</th>
+                <th class="p-2.5">Sharing Partners</th>
+                <th class="p-2.5">Outside-Agency Access</th>
+                <th class="p-2.5">Audit Cadence</th>
+              </tr>
+            </thead>
+            <tbody id="policy-tbody" class="divide-y divide-slate-800/80"></tbody>
+          </table>
+        </div>
+
+        <!-- Verbatim Quote Drawer -->
+        <div id="quote-drawer" class="hidden bg-slate-950 border border-sky-700/60 rounded-lg p-3 text-xs space-y-1">
+          <div class="flex items-center justify-between">
+            <span id="quote-title" class="font-semibold text-sky-400">Source Policy Quote</span>
+            <button onclick="document.getElementById('quote-drawer').classList.add('hidden')" class="text-slate-400 hover:text-white">Close ✕</button>
+          </div>
+          <p id="quote-text" class="text-slate-300 font-mono leading-relaxed bg-slate-900 p-2 rounded border border-slate-800"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Panel (5 cols): 4-Tier Data-Flow Lineage Graph + Plain-English Explainer -->
+    <section class="lg:col-span-5 flex flex-col bg-slate-900/70 border border-slate-800 rounded-xl p-4 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+        <div>
+          <h2 class="text-sm font-bold text-white">4-Tier Data-Flow Lineage Graph</h2>
+          <p id="graph-subtitle" class="text-xs text-slate-400">Select a policy or commute leg</p>
+        </div>
+        <span class="text-[11px] font-mono text-red-400">--- Dashed = Policy Gap</span>
+      </div>
+
+      <div class="bg-slate-950 border border-slate-800 rounded-lg p-2">
+        <svg id="lineage-svg" viewBox="0 0 500 260" class="w-full h-[250px]"></svg>
+      </div>
+
+      <div class="bg-slate-950 border border-slate-800 rounded-lg p-3 space-y-2 text-xs">
+        <div class="flex items-center justify-between">
+          <span class="px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800 font-semibold">WHAT THIS MEANS FOR YOU</span>
+          <span id="selected-retention" class="font-mono text-amber-300"></span>
+        </div>
+        <p id="plain-summary" class="text-slate-300 leading-relaxed"></p>
+      </div>
+
+      <div class="space-y-2">
+        <button onclick="copySunshineDraft()" class="w-full py-2 px-3 rounded-lg bg-red-600 hover:bg-red-500 text-white text-xs font-semibold transition">
+          Copy SF Sunshine Ordinance / Public Comment Draft
+        </button>
+        <pre id="draft-preview" class="hidden text-[11px] font-mono bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-slate-300 whitespace-pre-wrap"></pre>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    let appData = null;
+    let map = null;
+    let routeLayer = null;
+    let selectedPolicyIdx = 0;
+    let commuteMode = 'Driving';
+
+    const ROUTES = [
+      {
+        name: "San Francisco → SFO Airport → Palo Alto",
+        legs: [
+          { city: "San Francisco", coords: [37.7749, -122.4194], policyMatch: "sfpd_alpr_stp" },
+          { city: "South San Francisco", coords: [37.6547, -122.4077], policyMatch: "airport_alpr_stp" },
+          { city: "Palo Alto", coords: [37.4419, -122.1430], policyMatch: "pw_alpr_stp" }
+        ]
+      },
+      {
+        name: "San Francisco → Oakland → Berkeley",
+        legs: [
+          { city: "San Francisco", coords: [37.7749, -122.4194], policyMatch: "sfmta_lpr_tole_stp" },
+          { city: "Oakland", coords: [37.8044, -122.2712], policyMatch: "sfpd_alpr_amend" },
+          { city: "Berkeley", coords: [37.8715, -122.2730], policyMatch: "rec_alpr_stp" }
+        ]
+      },
+      {
+        name: "San Francisco → San Rafael (Marin)",
+        legs: [
+          { city: "San Francisco", coords: [37.7749, -122.4194], policyMatch: "sfpd_alpr_stp" },
+          { city: "San Rafael", coords: [37.9735, -122.5311], policyMatch: "pw_alpr_stp" }
+        ]
+      }
+    ];
+
+    async function init() {
+      const res = await fetch('/data.json');
+      appData = await res.json();
+
+      document.getElementById('m-total').textContent = `${appData.metrics.bay_area_total_records} (9 Bay Counties)`;
+      document.getElementById('m-recent').textContent = `${appData.metrics.bay_area_recent_source_pct}% (${appData.metrics.bay_area_recent_source_count})`;
+      document.getElementById('m-gaps').textContent = `${appData.metrics.sf_policies_with_sharing_gaps} / ${appData.metrics.sf_policies_count}`;
+
+      initMap();
+      renderRoute();
+      renderTable();
+      selectPolicy(0);
+    }
+
+    function initMap() {
+      map = L.map('map', { zoomControl: true }).setView([37.65, -122.28], 10);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      const heatPoints = appData.bayArea.heatmap_points.map(p => [p.coords[0], p.coords[1], Math.min(1.0, Math.max(0.25, p.count / 10))]);
+      if (L.heatLayer) {
+        L.heatLayer(heatPoints, { radius: 36, blur: 22, maxZoom: 12, gradient: { 0.3: '#0284c7', 0.65: '#f59e0b', 1.0: '#ef4444' } }).addTo(map);
+      }
+      routeLayer = L.layerGroup().addTo(map);
+      setTimeout(() => map.invalidateSize(), 150);
+    }
+
+    function setMode(m) {
+      commuteMode = m;
+      document.getElementById('mode-drive').className = m === 'Driving' ? 'px-2.5 py-1 rounded bg-sky-600 text-white font-medium' : 'px-2.5 py-1 rounded text-slate-400 hover:text-white font-medium';
+      document.getElementById('mode-transit').className = m === 'Transit' ? 'px-2.5 py-1 rounded bg-sky-600 text-white font-medium' : 'px-2.5 py-1 rounded text-slate-400 hover:text-white font-medium';
+      renderRoute();
+    }
+
+    function renderRoute() {
+      const idx = Number(document.getElementById('route-select').value);
+      const route = ROUTES[idx];
+      routeLayer.clearLayers();
+
+      const latlngs = route.legs.map(l => l.coords);
+      L.polyline(latlngs, { color: commuteMode === 'Driving' ? '#38bdf8' : '#10b981', weight: 3.5, dashArray: commuteMode === 'Transit' ? '6 6' : null }).addTo(routeLayer);
+      map.fitBounds(latlngs, { padding: [35, 35] });
+
+      const legsDiv = document.getElementById('route-legs');
+      legsDiv.innerHTML = '';
+
+      route.legs.forEach((leg) => {
+        const cityData = appData.bayArea.heatmap_points.find(p => p.city.toLowerCase() === leg.city.toLowerCase()) || { count: 0, technologies: {}, agencies: [] };
+        const topTechs = Object.entries(cityData.technologies).sort((a,b) => b[1]-a[1]).slice(0, 3).map(t => `${t[0]} (${t[1]})`).join(', ');
+
+        L.circleMarker(leg.coords, { radius: 7, color: '#f8fafc', fillColor: '#ef4444', fillOpacity: 0.9, weight: 2 })
+          .bindPopup(`<b>${leg.city}</b><br/>${cityData.count} Atlas deployments<br/>${topTechs || 'SF Policy Data'}`)
+          .addTo(routeLayer);
+
+        const card = document.createElement('button');
+        card.className = "text-left p-2.5 rounded-lg bg-slate-950 border border-slate-800 hover:border-sky-500 transition text-xs";
+        card.innerHTML = `
+          <div class="font-semibold text-white flex justify-between">
+            <span>${leg.city}</span>
+            <span class="text-sky-400 font-mono">${cityData.count} recs</span>
+          </div>
+          <div class="text-[11px] text-slate-400 mt-1 truncate">${topTechs || 'Click to inspect policy'}</div>
+        `;
+        card.onclick = () => {
+          const pIdx = appData.policies.findIndex(p => p.id === leg.policyMatch);
+          if (pIdx >= 0) selectPolicy(pIdx);
+        };
+        legsDiv.appendChild(card);
+      });
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('policy-tbody');
+      tbody.innerHTML = '';
+      appData.policies.forEach((p, idx) => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-800/50 cursor-pointer transition";
+        const isGap = (field) => (p.vague_or_blank_fields || []).includes(field);
+        tr.innerHTML = `
+          <td class="p-2.5 font-medium text-white">${p.short_name}<div class="text-[11px] text-slate-400">${p.technology}</div></td>
+          <td class="p-2.5 font-mono ${isGap('retention_period') ? 'text-amber-400 font-semibold' : 'text-slate-300'}" data-q="retention">${p.retention_period}</td>
+          <td class="p-2.5 text-slate-300">${(p.sharing_partners || []).slice(0,2).join(', ')}</td>
+          <td class="p-2.5 ${isGap('outside_agency_access') ? 'text-red-400 bg-red-950/25 font-semibold' : 'text-slate-300'}" data-q="sharing">${p.outside_agency_access}</td>
+          <td class="p-2.5 ${isGap('audit_cadence') ? 'text-amber-400 font-semibold' : 'text-slate-300'}" data-q="audit">${p.audit_cadence}</td>
+        `;
+        tr.onclick = (e) => {
+          selectPolicy(idx);
+          const qKey = e.target.getAttribute('data-q');
+          if (qKey && p.verbatim_quotes && p.verbatim_quotes[qKey]) {
+            document.getElementById('quote-title').textContent = `${p.short_name} (${p.filename}) — ${qKey.toUpperCase()} Quote`;
+            document.getElementById('quote-text').textContent = `"${p.verbatim_quotes[qKey]}"`;
+            document.getElementById('quote-drawer').classList.remove('hidden');
+          }
+        };
+        tbody.appendChild(tr);
+      });
+    }
+
+    function selectPolicy(idx) {
+      selectedPolicyIdx = idx;
+      const p = appData.policies[idx];
+      document.getElementById('graph-subtitle').textContent = `${p.agency} — ${p.technology}`;
+      document.getElementById('plain-summary').textContent = p.plain_english_summary;
+      document.getElementById('selected-retention').textContent = `Retention: ${p.retention_period}`;
+      drawLineageGraph(p);
+    }
+
+    function drawLineageGraph(p) {
+      const svg = document.getElementById('lineage-svg');
+      const hasGap = (p.vague_or_blank_fields || []).includes('outside_agency_access');
+      const partner = (p.sharing_partners && p.sharing_partners[0]) || 'SFPD / NCRIC';
+
+      const nodes = [
+        { x: 65, y: 130, title: p.short_name, sub: 'Tier 1: Capture', col: '#38bdf8' },
+        { x: 195, y: 130, title: 'Agency / Vendor', sub: p.retention_period.slice(0,16), col: '#a78bfa' },
+        { x: 325, y: 75, title: partner.slice(0,15), sub: 'Tier 3: Authorized', col: '#10b981' },
+        { x: 435, y: 185, title: 'External Hubs', sub: hasGap ? 'Vague / Gap!' : 'Restricted', col: hasGap ? '#ef4444' : '#64748b' }
+      ];
+
+      let html = '';
+      const edges = [
+        { a: nodes[0], b: nodes[1], gap: false },
+        { a: nodes[1], b: nodes[2], gap: false },
+        { a: nodes[1], b: nodes[3], gap: hasGap },
+        { a: nodes[2], b: nodes[3], gap: hasGap }
+      ];
+
+      edges.forEach(e => {
+        const cx = (e.a.x + e.b.x) / 2;
+        html += `<path d="M ${e.a.x} ${e.a.y} C ${cx} ${e.a.y}, ${cx} ${e.b.y}, ${e.b.x} ${e.b.y}" fill="none" stroke="${e.gap ? '#ef4444' : '#475569'}" stroke-width="${e.gap ? 2.5 : 2}" class="${e.gap ? 'edge-gap' : ''}" />`;
+      });
+
+      nodes.forEach(n => {
+        html += `
+          <g transform="translate(${n.x - 52}, ${n.y - 24})">
+            <rect width="104" height="48" rx="8" fill="#0f172a" stroke="${n.col}" stroke-width="1.8" />
+            <text x="52" y="21" text-anchor="middle" fill="#f8fafc" font-size="11" font-weight="bold">${n.title}</text>
+            <text x="52" y="36" text-anchor="middle" fill="${n.col}" font-size="9">${n.sub}</text>
+          </g>`;
+      });
+
+      svg.innerHTML = html;
+    }
+
+    function switchTab(tab) {
+      document.getElementById('tab-map').classList.toggle('hidden', tab !== 'map');
+      document.getElementById('tab-table').classList.toggle('hidden', tab !== 'table');
+      document.getElementById('tab-map-btn').className = tab === 'map' ? 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 text-white' : 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300';
+      document.getElementById('tab-table-btn').className = tab === 'table' ? 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 text-white' : 'px-3 py-1.5 rounded-lg text-slate-300 bg-slate-800';
+      if (tab === 'map' && map) setTimeout(() => map.invalidateSize(), 100);
+    }
+
+    function copySunshineDraft() {
+      const p = appData.policies[selectedPolicyIdx];
+      const draft = `TO: ${p.agency} Privacy Liaison & SF COIT\nRE: SF Admin Code Ch. 19B & Sunshine Request (${p.filename})\n\nUnder CA SB 34 and SF Admin Code Ch. 19B, we request clarification on ${p.short_name}'s ${p.technology} policy:\n1. Current retention is listed as "${p.retention_period}" — please provide exact deletion audit logs.\n2. Outside-agency access ("${p.outside_agency_access}") lacks explicit downstream query limits. Please provide all external sharing MOUs over the past 12 months.`;
+      const pre = document.getElementById('draft-preview');
+      pre.textContent = draft;
+      pre.classList.remove('hidden');
+      navigator.clipboard?.writeText(draft);
+    }
+
+    init();
+  </script>
+</body>
+</html>

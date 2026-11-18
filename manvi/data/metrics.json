@@ -1,0 +1,35 @@
+{
+  "bay_area_total_records": 297,
+  "bay_area_recent_source_count": 27,
+  "bay_area_recent_source_pct": 9.1,
+  "bay_area_top_technologies": [
+    {
+      "technology": "Automated License Plate Readers",
+      "count": 95
+    },
+    {
+      "technology": "Body-worn Cameras",
+      "count": 85
+    },
+    {
+      "technology": "Camera Registry",
+      "count": 44
+    },
+    {
+      "technology": "Drones",
+      "count": 30
+    },
+    {
+      "technology": "Gunshot Detection",
+      "count": 10
+    },
+    {
+      "technology": "Third-party Investigative Platforms",
+      "count": 10
+    }
+  ],
+  "sf_policies_count": 7,
+  "sf_policies_with_sharing_gaps": 6,
+  "sf_policies_with_audit_gaps": 0,
+  "extraction_mode": "deterministic-text-fallback"
+}

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WatchTheFlock — Intro Film (Documentary-Theatre Style)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%; height: 100%; background: #000; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; font-family: Georgia, "Times New Roman", serif;
+    }
+    #stage-wrap {
+      position: relative; width: 100vw; max-width: 177.78vh;
+      aspect-ratio: 16 / 9; background: #000; overflow: hidden;
+    }
+    canvas { width: 100%; height: 100%; display: block; }
+    #subtitle {
+      position: absolute; left: 50%; bottom: 8.5%; transform: translateX(-50%);
+      text-align: center; font-size: clamp(16px, 2.2vw, 30px);
+      line-height: 1.35; color: #f8fafc; letter-spacing: 0.01em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.95);
+      pointer-events: none; max-width: 80%;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+    #start-overlay {
+      position: absolute; inset: 0; background: rgba(0,0,0,0.88);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 16px; z-index: 20; cursor: pointer;
+    }
+    #start-btn {
+      padding: 14px 32px; border: 1px solid #475569; background: #0f172a;
+      color: #f8fafc; font-size: 16px; letter-spacing: 0.08em; text-transform: uppercase;
+      cursor: pointer; font-family: ui-sans-serif, system-ui, sans-serif;
+    }
+    #start-btn:hover { background: #1e293b; border-color: #94a3b8; }
+    #end-controls {
+      position: absolute; bottom: 24px; right: 24px; z-index: 30;
+      display: none; gap: 10px; font-family: ui-sans-serif, system-ui, sans-serif;
+    }
+    .ctrl-btn {
+      padding: 8px 16px; border: 1px solid #334155; background: rgba(15,23,42,0.9);
+      color: #e2e8f0; font-size: 12px; cursor: pointer; text-decoration: none;
+    }
+    .ctrl-btn:hover { background: #1e293b; border-color: #38bdf8; }
+  </style>
+</head>
+<body>
+  <div id="stage-wrap">
+    <canvas id="c" width="1280" height="720"></canvas>
+    <div id="subtitle"></div>
+
+    <div id="start-overlay" onclick="startFilm()">
+      <div style="font-size: 13px; color: #94a3b8; font-family: ui-sans-serif, system-ui, sans-serif; letter-spacing: 0.14em; text-transform: uppercase;">
+        35-Second Documentary Intro · Audio Enabled
+      </div>
+      <button id="start-btn">▶ Play Intro Film</button>
+    </div>
+
+    <div id="end-controls">
+      <button class="ctrl-btn" onclick="startFilm()">↻ Replay</button>
+      <a class="ctrl-btn" href="/" style="border-color:#0284c7; color:#38bdf8;">Launch Live App →</a>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    const W = 1280, H = 720;
+    const subEl = document.getElementById('subtitle');
+
+    const BEATS = [
+      { t0: 0.0,  t1: 3.0,  scene: 'skyline', sub: 'San Francisco requires a public policy' },
+      { t0: 3.0,  t1: 6.0,  scene: 'traffic', sub: 'for every surveillance tool.' },
+      { t0: 6.0,  t1: 11.5, scene: 'grid3x3', sub: 'Police. Transit. Airport. Public Works.' },
+      { t0: 11.5, t1: 14.2, scene: 'doc1',    sub: 'On paper, they promise strict guardrails.' },
+      { t0: 14.2, t1: 17.0, scene: 'doc2',    sub: 'In reality, those rules live in unread PDFs.' },
+      { t0: 17.0, t1: 19.8, scene: 'doc3',    sub: 'Retention caps vary. Outside sharing stays vague.' },
+      { t0: 19.8, t1: 25.0, scene: 'grid4x5', sub: 'Policy versus promise. Nobody could compare them.' },
+      { t0: 25.0, t1: 28.0, scene: 'silh',    sub: 'Until now.' },
+      { t0: 28.0, t1: 31.2, scene: 'uiflash', sub: '297 Bay Area records. 6 of 7 SF policies flagged.' },
+      { t0: 31.2, t1: 35.0, scene: 'outro',   sub: '' }
+    ];
+
+    let startTs = null;
+    let rafId = null;
+    let audioCtx = null;
+
+    function startAmbientAudio() {
+      try {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const now = audioCtx.currentTime;
+        const master = audioCtx.createGain();
+        master.gain.setValueAtTime(0.001, now);
+        master.gain.exponentialRampToValueAtTime(0.18, now + 2.0);
+        master.gain.setValueAtTime(0.18, now + 30.5);
+        master.gain.exponentialRampToValueAtTime(0.0001, now + 34.8);
+        master.connect(audioCtx.destination);
+
+        [65.41, 98.0, 155.56].forEach((freq, i) => {
+          const osc = audioCtx.createOscillator();
+          const filter = audioCtx.createBiquadFilter();
+          osc.type = i === 0 ? 'sawtooth' : 'triangle';
+          osc.frequency.setValueAtTime(freq, now);
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(i === 0 ? 220 : 420, now);
+          const g = audioCtx.createGain();
+          g.gain.value = i === 0 ? 0.5 : 0.25;
+          osc.connect(filter); filter.connect(g); g.connect(master);
+          osc.start(now);
+          osc.stop(now + 35.2);
+        });
+
+        [6.0, 11.5, 14.2, 17.0, 19.8, 25.0, 28.0, 31.2].forEach(t => {
+          const osc = audioCtx.createOscillator();
+          const g = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(90, now + t);
+          osc.frequency.exponentialRampToValueAtTime(32, now + t + 0.25);
+          g.gain.setValueAtTime(0.25, now + t);
+          g.gain.exponentialRampToValueAtTime(0.001, now + t + 0.28);
+          osc.connect(g); g.connect(audioCtx.destination);
+          osc.start(now + t);
+          osc.stop(now + t + 0.3);
+        });
+      } catch (e) {}
+    }
+
+    function drawGrain(alpha = 0.045) {
+      ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+      for (let i = 0; i < 180; i++) {
+        ctx.fillRect(Math.random() * W, Math.random() * H, 2, 2);
+      }
+    }
+
+    function drawSkyline(t) {
+      const grad = ctx.createLinearGradient(0, 0, 0, H);
+      grad.addColorStop(0, '#020617');
+      grad.addColorStop(1, '#0f172a');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      for (let i = 0; i < 5; i++) {
+        ctx.fillStyle = `rgba(148,163,184,${0.03 + i * 0.01})`;
+        const x = ((t * 18 + i * 240) % (W + 400)) - 200;
+        ctx.fillRect(x, 280 + i * 45, 500, 35);
+      }
+
+      ctx.fillStyle = '#030712';
+      const towers = [[120,260,80],[220,210,70],[310,160,95],[430,240,65],[520,120,60],[610,190,110],[740,220,85],[850,150,75],[960,230,90],[1080,270,80]];
+      towers.forEach(([x, y, w]) => {
+        ctx.fillRect(x, y, w, H - y);
+        ctx.fillStyle = 'rgba(248,250,252,0.12)';
+        for (let wy = y + 20; wy < H - 80; wy += 24) {
+          if ((wy + x) % 3 === 0) ctx.fillRect(x + 12, wy, 6, 8);
+        }
+        ctx.fillStyle = '#030712';
+      });
+      ctx.beginPath(); ctx.moveTo(550, 90); ctx.lineTo(510, 420); ctx.lineTo(590, 420); ctx.closePath(); ctx.fill();
+    }
+
+    function drawTraffic(t) {
+      ctx.fillStyle = '#030712';
+      ctx.fillRect(0, 0, W, H);
+      for (let i = 0; i < 18; i++) {
+        const y = 140 + (i % 6) * 75;
+        const speed = 180 + (i % 4) * 90;
+        const x = ((t * speed + i * 190) % (W + 300)) - 150;
+        ctx.strokeStyle = i % 2 === 0 ? 'rgba(248,250,252,0.55)' : 'rgba(239,68,68,0.65)';
+        ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + 95, y); ctx.stroke();
+      }
+      ctx.strokeStyle = 'rgba(56,189,248,0.22)';
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(W/2, H/2, 160 + Math.sin(t*3)*6, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(W/2, H/2, 85, 0, Math.PI*2); ctx.stroke();
+    }
+
+    function drawGrid3x3(t) {
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, W, H);
+      const labels = [
+        'SFPD · ALPR', 'SFMTA · TRANSIT LPR', 'SFO · AIRPORT CCTV',
+        'PUBLIC WORKS · ALPR', 'REC & PARK · UAV', 'PORT OF SF · CAMERAS',
+        'NCRIC · FUSION HUB', '297 BAY RECORDS', 'COIT · AUDIT LOGS'
+      ];
+      const gw = 380, gh = 200, gap = 18;
+      const sx = (W - (gw*3 + gap*2)) / 2, sy = (H - (gh*3 + gap*2)) / 2;
+      labels.forEach((lbl, idx) => {
+        const r = Math.floor(idx / 3), c = idx % 3;
+        const x = sx + c * (gw + gap), y = sy + r * (gh + gap);
+        ctx.fillStyle = '#0b1120';
+        ctx.fillRect(x, y, gw, gh);
+        const syLine = y + ((t * 90 + idx * 37) % gh);
+        ctx.fillStyle = idx === 6 ? 'rgba(239,68,68,0.25)' : 'rgba(56,189,248,0.18)';
+        ctx.fillRect(x, syLine, gw, 3);
+        ctx.strokeStyle = '#1e293b'; ctx.strokeRect(x, y, gw, gh);
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = 'bold 14px ui-monospace, monospace';
+        ctx.fillText(lbl, x + 18, y + 34);
+        ctx.fillStyle = '#64748b';
+        ctx.font = '11px ui-monospace, monospace';
+        ctx.fillText(`ACTIVE NODE // 0${idx+1}`, x + 18, y + gh - 20);
+      });
+    }
+
+    function drawCenteredDocInset(title, clauseTitle, quoteLines, highlightRed) {
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, W, H);
+      const iw = 620, ih = 465;
+      const ix = (W - iw)/2, iy = (H - ih)/2 - 20;
+      ctx.fillStyle = '#f8fafc';
+      ctx.fillRect(ix, iy, iw, ih);
+
+      ctx.fillStyle = '#0f172a';
+      ctx.font = 'bold 16px Georgia, serif';
+      ctx.fillText(title, ix + 36, iy + 52);
+      ctx.fillStyle = '#475569';
+      ctx.fillRect(ix + 36, iy + 66, iw - 72, 1.5);
+
+      ctx.fillStyle = '#1e293b';
+      ctx.font = 'bold 14px ui-monospace, monospace';
+      ctx.fillText(clauseTitle, ix + 36, iy + 108);
+
+      ctx.fillStyle = highlightRed ? 'rgba(239,68,68,0.22)' : 'rgba(245,158,11,0.25)';
+      ctx.fillRect(ix + 32, iy + 128, iw - 64, quoteLines.length * 28 + 16);
+
+      ctx.fillStyle = '#0f172a';
+      ctx.font = '15px Georgia, serif';
+      quoteLines.forEach((line, i) => {
+        ctx.fillText(line, ix + 40, iy + 154 + i * 28);
+      });
+
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '11px ui-monospace, monospace';
+      ctx.fillText('SOURCE: SF SURVEILLANCE TECHNOLOGY INVENTORY (PUBLIC RECORD)', ix + 36, iy + ih - 24);
+    }
+
+    function drawGrid4x5(t) {
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, W, H);
+      const cols = 5, rows = 4, cw = W / cols, ch = H / rows;
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const x = c * cw + 4, y = r * ch + 4, w = cw - 8, h = ch - 8;
+          const pulse = Math.sin(t * 5 + r * 1.7 + c * 2.3) > 0.3;
+          ctx.fillStyle = pulse ? '#172554' : '#090d16';
+          ctx.fillRect(x, y, w, h);
+          ctx.strokeStyle = pulse ? '#ef4444' : '#1e293b';
+          ctx.strokeRect(x, y, w, h);
+          ctx.fillStyle = pulse ? '#fca5a5' : '#475569';
+          ctx.font = '10px ui-monospace, monospace';
+          ctx.fillText(pulse ? 'GAP: OUTSIDE ACCESS' : 'POLICY CLAUSE', x + 12, y + h/2);
+        }
+      }
+    }
+
+    function drawSilhouette() {
+      ctx.fillStyle = '#020617';
+      ctx.fillRect(0, 0, W, H);
+      const g = ctx.createRadialGradient(W/2, H/2 - 20, 20, W/2, H/2, 340);
+      g.addColorStop(0, 'rgba(56,189,248,0.22)');
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#000';
+      ctx.beginPath(); ctx.arc(W/2, H/2 - 40, 42, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.moveTo(W/2 - 90, H); ctx.quadraticCurveTo(W/2, H/2 + 20, W/2 + 90, H); ctx.fill();
+    }
+
+    function drawUIFlash(t) {
+      ctx.fillStyle = '#090d16';
+      ctx.fillRect(0, 0, W, H);
+      ctx.strokeStyle = '#1e293b'; ctx.fillStyle = '#0f172a';
+      ctx.fillRect(60, 70, 560, 480); ctx.strokeRect(60, 70, 560, 480);
+      ctx.fillRect(650, 70, 570, 480); ctx.strokeRect(650, 70, 570, 480);
+
+      ctx.fillStyle = '#f8fafc'; ctx.font = 'bold 16px ui-sans-serif, sans-serif';
+      ctx.fillText('SF Policy vs. Promise Matrix', 85, 110);
+      ctx.fillText('4-Tier Data-Flow Lineage', 675, 110);
+
+      const rows = ['SFPD ALPR', 'SFMTA LPR', 'SFO Airport', 'Public Works', 'Rec & Park'];
+      rows.forEach((r, i) => {
+        const y = 150 + i * 68;
+        ctx.fillStyle = '#1e293b'; ctx.fillRect(85, y, 510, 46);
+        ctx.fillStyle = '#e2e8f0'; ctx.font = '13px ui-monospace, monospace';
+        ctx.fillText(r, 100, y + 28);
+        ctx.fillStyle = 'rgba(239,68,68,0.25)'; ctx.fillRect(390, y + 8, 190, 30);
+        ctx.fillStyle = '#f87171'; ctx.fillText('SHARING GAP', 425, y + 28);
+      });
+
+      ctx.setLineDash([8, 8]);
+      ctx.lineDashOffset = -t * 40;
+      ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.moveTo(730, 300); ctx.bezierCurveTo(880, 180, 980, 420, 1140, 280); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    function drawOutro(t) {
+      const fade = Math.min(1, Math.max(0, (t - 31.2) / 1.5));
+      const fadeOut = t > 33.6 ? Math.max(0, 1 - (t - 33.6) / 1.2) : 1;
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, W, H);
+      ctx.globalAlpha = fade * fadeOut;
+      ctx.fillStyle = '#f8fafc';
+      ctx.font = '44px Georgia, "Times New Roman", serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('WatchTheFlock', W/2, H/2);
+      ctx.font = '15px ui-monospace, monospace';
+      ctx.fillStyle = '#94a3b8';
+      ctx.fillText('POLICY VS. PROMISE · BAY AREA DATA LINEAGE', W/2, H/2 + 40);
+      ctx.textAlign = 'left';
+      ctx.globalAlpha = 1;
+    }
+
+    function render(now) {
+      const t = (now - startTs) / 1000;
+      if (t >= 35.0) {
+        ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+        subEl.textContent = '';
+        document.getElementById('end-controls').style.display = 'flex';
+        return;
+      }
+
+      const beat = BEATS.find(b => t >= b.t0 && t < b.t1) || BEATS[BEATS.length - 1];
+      subEl.textContent = beat.sub;
+
+      if (beat.scene === 'skyline') drawSkyline(t);
+      else if (beat.scene === 'traffic') drawTraffic(t);
+      else if (beat.scene === 'grid3x3') drawGrid3x3(t);
+      else if (beat.scene === 'doc1') drawCenteredDocInset(
+        'SFPD — Automated License Plate Reader Policy',
+        'SECTION 4.2 · DATA RETENTION',
+        ['"ALPR data shall be retained for no longer than', 'one year unless tied to an active investigation."'],
+        false
+      );
+      else if (beat.scene === 'doc2') drawCenteredDocInset(
+        'SFMTA — Transit Lane Enforcement LPR Policy',
+        'SECTION 6.1 · THIRD-PARTY ACCESS',
+        ['"Data may be shared with authorized law enforcement', 'agencies as permitted by applicable law..."'],
+        true
+      );
+      else if (beat.scene === 'doc3') drawCenteredDocInset(
+        'Public Works & Rec/Park — ALPR Policy Gap',
+        'AUDIT FINDING · OUTSIDE-AGENCY SHARING',
+        ['6 of 7 SF policies leave downstream sharing', 'limits or outside-agency query rules vague.'],
+        true
+      );
+      else if (beat.scene === 'grid4x5') drawGrid4x5(t);
+      else if (beat.scene === 'silh') drawSilhouette();
+      else if (beat.scene === 'uiflash') drawUIFlash(t);
+      else if (beat.scene === 'outro') drawOutro(t);
+
+      drawGrain();
+      rafId = requestAnimationFrame(render);
+    }
+
+    function startFilm() {
+      document.getElementById('start-overlay').style.display = 'none';
+      document.getElementById('end-controls').style.display = 'none';
+      if (rafId) cancelAnimationFrame(rafId);
+      startAmbientAudio();
+      startTs = performance.now();
+      rafId = requestAnimationFrame(render);
+    }
+  </script>
+</body>
+</html>
